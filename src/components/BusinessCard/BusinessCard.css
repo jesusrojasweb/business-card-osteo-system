@@ -199,6 +199,7 @@
 
 .contact-item.align-start {
   align-items: flex-start;
+  text-align: left;
 }
 
 .icon {
