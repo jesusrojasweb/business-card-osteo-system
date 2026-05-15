@@ -1,0 +1,296 @@
+.card-wrapper {
+  perspective: 1000px;
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.card-container {
+  width: 100%;
+  aspect-ratio: 1.75; /* Standard business card aspect ratio */
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out; /* Smooth tilt */
+  position: relative;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+}
+
+.card-container.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: white; /* Base fallback */
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* Face Content Shared */
+.face-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* --- FRONT FACE --- */
+.front-face-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+}
+
+.front-bg-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.logo-container {
+  width: 40%;
+  max-width: 300px;
+  z-index: 2;
+}
+
+.logo-container .logo {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+
+/* --- BACK FACE --- */
+.back-face-content {
+  display: flex;
+  background-color: var(--color-back-dark);
+}
+
+.back-left-photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 45%;
+  height: 100%;
+  z-index: 1;
+}
+
+.back-left-photo .or-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left center;
+}
+
+.back-bg-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.bg-graphic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bg-graphic svg {
+  width: 100%;
+  height: 100%;
+}
+
+.back-right-content {
+  position: relative;
+  z-index: 4;
+  margin-left: 45%;
+  width: 55%;
+  height: 100%;
+  padding: 8% 6% 8% 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+}
+
+.header-info {
+  text-align: right;
+  margin-bottom: auto;
+}
+
+.header-info h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin-bottom: 0.2rem;
+}
+
+.header-info p {
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+.pulse-divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem 0;
+  opacity: 0.8;
+}
+
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: auto;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.contact-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.contact-link:hover {
+  color: var(--color-green);
+}
+
+.contact-item.align-start {
+  align-items: flex-start;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  background-color: var(--color-green);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+
+/* Mobile CTA Button */
+.flip-cta {
+  display: none;
+  background-color: var(--color-green);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(90, 191, 28, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.flip-cta:active {
+  transform: scale(0.95);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card-container {
+    aspect-ratio: 1.6;
+  }
+  
+  .card-container:active .card-inner {
+    transform: scale(0.97) rotateY(var(--rotation, 0deg));
+  }
+  
+  .card-container.flipped:active .card-inner {
+    --rotation: 180deg;
+  }
+
+  .flip-cta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Specific tweaks for smaller screens */
+  .back-right-content {
+    margin-left: 40%;
+    width: 60%;
+    padding: 6% 4% 6% 8%;
+  }
+
+  .header-info h2 {
+    font-size: 1.4rem;
+  }
+
+  .header-info p {
+    font-size: 0.85rem;
+  }
+
+  .contact-item {
+    font-size: 0.75rem;
+    gap: 0.8rem;
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .icon svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-container {
+    aspect-ratio: 1.5; /* more squarish on very small phones to fit text */
+  }
+  .header-info h2 {
+    font-size: 1.2rem;
+  }
+  .contact-item {
+    font-size: 0.65rem;
+  }
+}
