@@ -14,10 +14,6 @@ const BusinessCard = () => {
     const checkMobile = () => {
       const mobile = window.innerWidth <= 768;
       setIsMobile(mobile);
-      // On mobile, show back face by default
-      if (mobile) {
-        setIsFlipped(true);
-      }
     };
 
     checkMobile();
@@ -26,7 +22,7 @@ const BusinessCard = () => {
   }, []);
 
   const handleMouseMove = (e) => {
-    if (isMobile || isFlipped) {
+    if (isMobile || !isFlipped) {
       setTilt({ x: 0, y: 0 });
       return;
     }
@@ -42,7 +38,13 @@ const BusinessCard = () => {
 
     // Calculate rotation limits (e.g., max 15 degrees)
     const rotateX = ((y - centerY) / centerY) * -15;
-    const rotateY = ((x - centerX) / centerX) * 15;
+    let rotateY = ((x - centerX) / centerX) * 15;
+
+    // If the card is flipped 180 degrees, the X axis is mirrored relative to the container.
+    // We invert the rotateY so the tilt still feels natural (pushing down where the mouse is).
+    if (isFlipped) {
+      rotateY = -rotateY;
+    }
 
     setTilt({ x: rotateX, y: rotateY });
   };
@@ -70,10 +72,10 @@ const BusinessCard = () => {
       >
         <div className="card-inner">
           <div className="card-face card-front">
-            <FrontFace />
+            <BackFace />
           </div>
           <div className="card-face card-back">
-            <BackFace />
+            <FrontFace />
           </div>
         </div>
       </div>
@@ -86,7 +88,7 @@ const BusinessCard = () => {
             <path d="M3 22v-6h6"></path>
             <path d="M21 12a9 9 0 0 1-15 6.7L3 16"></path>
           </svg>
-          {isFlipped ? 'Ver Logo' : 'Ver Información'}
+          {isFlipped ? 'Ver Información' : 'Ver Logo'}
         </button>
       )}
     </div>

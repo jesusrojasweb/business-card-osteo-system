@@ -235,7 +235,8 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .card-container {
-    aspect-ratio: 1.6;
+    aspect-ratio: 0.6; /* Vertical card for mobile */
+    max-width: 340px;
   }
   
   .card-container:active .card-inner {
@@ -252,45 +253,81 @@
     gap: 8px;
   }
 
-  /* Specific tweaks for smaller screens */
+  /* Vertical layout for Back Face */
+  .back-face-content {
+    flex-direction: column;
+    background-color: #224863; /* Base blue for the whole back */
+  }
+
+  .back-bg-svg {
+    display: none; /* Hide desktop SVGs to prevent weird stretching */
+  }
+
+  .back-left-photo {
+    position: relative;
+    width: 100%;
+    height: 35%;
+  }
+
   .back-right-content {
-    margin-left: 40%;
-    width: 60%;
-    padding: 6% 4% 6% 8%;
+    margin-left: 0;
+    width: 100%;
+    height: 65%;
+    padding: 6% 8%;
+    align-items: center;
+  }
+
+  .header-info {
+    text-align: center;
   }
 
   .header-info h2 {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
   }
 
   .header-info p {
-    font-size: 0.85rem;
+    font-size: 1rem;
+  }
+
+  .contact-list {
+    align-items: flex-start;
+    gap: 1.2rem;
+    /* Optional: constrain width slightly so it doesn't span full width, keeping it visually centered */
+    width: max-content;
+    max-width: 100%;
   }
 
   .contact-item {
-    font-size: 0.75rem;
-    gap: 0.8rem;
+    font-size: 0.85rem;
+    gap: 1rem;
+    justify-content: flex-start;
+  }
+
+  .contact-item.align-start {
+    align-items: flex-start;
+    text-align: left;
   }
 
   .icon {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
   }
   
   .icon svg {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
   }
 }
 
 @media (max-width: 480px) {
   .card-container {
-    aspect-ratio: 1.5; /* more squarish on very small phones to fit text */
+    aspect-ratio: 0.55; /* Slightly taller on very small phones */
+    max-width: 300px;
   }
   .header-info h2 {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
   .contact-item {
-    font-size: 0.65rem;
+    font-size: 0.75rem;
   }
 }
