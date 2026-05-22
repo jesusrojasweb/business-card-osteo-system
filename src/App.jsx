@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import './App.css';
 import BusinessCard from './components/BusinessCard/BusinessCard';
 
@@ -35,6 +36,7 @@ function App() {
           <Route path="*" element={<Navigate to="/luisa" replace />} />
         </Routes>
       </main>
+      <Analytics />
     </Router>
   );
 }
