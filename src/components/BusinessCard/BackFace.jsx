@@ -1,7 +1,18 @@
 import React from 'react';
 import orBg from '../../assets/or-background.png';
 
-const BackFace = () => {
+const BackFace = ({ data }) => {
+  const person = data || {
+    name: 'LUISA VARELA',
+    title: 'Directora Ejecutiva',
+    phone: '0424-9594187',
+    phoneClean: '4249594187',
+    instagram: '@osteosystems_vzla',
+    instagramUrl: 'osteosystems_vzla',
+    address: <>Multicentro Profesional<br/>Bicentenario, Mezzanina, Ofic 7</>,
+    mapLink: 'https://maps.app.goo.gl/dFamM9dV6UuSDJCQ6'
+  };
+
   return (
     <div className="face-content back-face-content">
       <div className="back-left-photo">
@@ -36,8 +47,8 @@ const BackFace = () => {
 
       <div className="back-right-content">
         <div className="header-info">
-          <h2>LUISA VARELA</h2>
-          <p>Directora Ejecutiva</p>
+          <h2>{person.name}</h2>
+          <p>{person.title}</p>
         </div>
         
         <div className="pulse-divider">
@@ -51,19 +62,19 @@ const BackFace = () => {
             <div className="icon">
               <svg viewBox="0 0 24 24" fill="white" width="18" height="18"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
             </div>
-            <a href="https://wa.me/584249594187" target="_blank" rel="noopener noreferrer" className="contact-link" onClick={(e) => e.stopPropagation()}>0424-9594187</a>
+            <a href={`https://wa.me/58${person.phoneClean}`} target="_blank" rel="noopener noreferrer" className="contact-link" onClick={(e) => e.stopPropagation()}>{person.phone}</a>
           </div>
           <div className="contact-item">
             <div className="icon">
                <svg viewBox="0 0 24 24" fill="white" width="18" height="18"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
             </div>
-            <a href="https://instagram.com/osteosystems_vzla" target="_blank" rel="noopener noreferrer" className="contact-link" onClick={(e) => e.stopPropagation()}>@osteosystems_vzla</a>
+            <a href={`https://instagram.com/${person.instagramUrl}`} target="_blank" rel="noopener noreferrer" className="contact-link" onClick={(e) => e.stopPropagation()}>{person.instagram}</a>
           </div>
           <div className="contact-item align-start">
             <div className="icon">
               <svg viewBox="0 0 24 24" fill="white" width="18" height="18"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             </div>
-            <a href="https://maps.app.goo.gl/dFamM9dV6UuSDJCQ6" target="_blank" rel="noopener noreferrer" className="contact-link" onClick={(e) => e.stopPropagation()}>Multicentro Profesional<br/>Bicentenario, Mezzanina, Ofic 7</a>
+            <a href={person.mapLink} target="_blank" rel="noopener noreferrer" className="contact-link" onClick={(e) => e.stopPropagation()}>{person.address}</a>
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@ import './BusinessCard.css';
 import FrontFace from './FrontFace';
 import BackFace from './BackFace';
 
-const BusinessCard = () => {
+const BusinessCard = ({ data }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
@@ -72,7 +72,7 @@ const BusinessCard = () => {
       >
         <div className="card-inner">
           <div className="card-face card-front">
-            <BackFace />
+            <BackFace data={data} />
           </div>
           <div className="card-face card-back">
             <FrontFace />
